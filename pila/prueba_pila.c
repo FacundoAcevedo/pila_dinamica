@@ -18,8 +18,13 @@ void print_test(char* name, bool result) {
 void prueba_pila() {
     
 // Declaro las variables a utilizar
-int valor1 = 3;
-char *cadena1 = "pizza conmigo";
+int cero = 0;
+int uno = 1;
+int *val0 ;
+val0 = &cero;
+int *val1;
+val1 = &uno; 
+char *val2 = "Pod";
 
 
 // Comienzo de pruebas
@@ -31,12 +36,10 @@ print_test("Prueba pila_crear", pila = pila_crear());
 
 // La pila esta vacia 
 print_test("Prueba pila_esta_vacia (0 elemento)", pila_esta_vacia(pila));
-print_test("Prueba pila_apilar (entero)",pila_apilar(pila, &valor1));  
+print_test("Prueba pila_apilar (entero)",pila_apilar(pila, val0));  
 print_test("Prueba pila_esta_vacia (1 elemento)", !pila_esta_vacia(pila));
-void* tope;
-tope = pila_ver_tope(pila);
-printf("tope: %p ", tope);
-//~ print_test("Prueba ver tope", (int)tope==valor1);
+
+print_test("Prueba ver tope", (pila_ver_tope(pila))==val0);
 //~ print_test("Prueba pila_apilar (cadena)",pila_apilar(pila, cadena1));
 //~ print_test("Prueba pila_desapilar (cadena)", !strcmp(pila_desapilar(pila),cadena1));
 //~ print_test("Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==3);

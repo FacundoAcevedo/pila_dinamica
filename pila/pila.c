@@ -59,13 +59,18 @@ bool pila_apilar(pila_t *pila, void* valor)
     //le reasigno memoria a pila.dato si llegue paso un multiplo de 10 en cantidad 
     if ((pila->tamanio - pila->cantidad) == 0){
 	    pila->datos = realloc(pila->datos, 10* sizeof(void*));
+	    puts("hice un realloc");
 	    pila->tamanio += 10;
 		}    
     //verifico que todo haya funcionado
     if (pila->datos == NULL) return false;
-	*(pila->datos + pila->cantidad -1) = &valor;
+	//~ printf("cantidad %zu\n", pila->cantidad);
+	//~ printf("direccion de datos %p\n", pila->datos);
+	//~ printf("direccion de datos + pila->cantidad (antes de agregar valor) %p\n", pila->datos + pila->cantidad);
+	*(pila->datos + pila->cantidad) = valor;
     pila->cantidad += 1;
-    return true;
+    //~ printf("direccion de datos + pila->cantidad (despues de agregar valor) %p\n", pila->datos + pila->cantidad);
+	return true;
 }
 
 // Obtiene el valor del tope de la pila. Si la pila tiene elementos,
@@ -76,8 +81,9 @@ bool pila_apilar(pila_t *pila, void* valor)
 void* pila_ver_tope(const pila_t *pila)
 {
     if (pila->cantidad == 0) return NULL;
-    
-    return *(pila->datos + (pila->cantidad));
+    void* tope;
+    tope = (pila->datos + (pila->cantidad));
+    return tope;
 }
    
     

@@ -79,8 +79,9 @@ print_test("14) Prueba ver tope NULL", pila_ver_tope(pila)==NULL);
     //~ print_test("Prueba, elemento 0",*(int*)pila_desapilar(pila)==0);
     //~ print_test("Prueba si esta vacio",pila_esta_vacia(pila));
 //~ 
-    //~ //Destruyo las pilas
-    //~ pila_destruir(pila);
+
+//Destruyo las pilas
+pila_destruir(pila);
 }
 
 

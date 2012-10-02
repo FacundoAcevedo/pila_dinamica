@@ -1,0 +1,43 @@
+ Pila
+ Para el lunes 10/09 tienen que entregar una implementación de pila dinámica 
+ (es decir que pueda crecer o reducirse según la cantidad de elementos) que 
+ contenga punteros genéricos (void*).
+
+ Se adjunta el archivo pila.h que tienen que utilizar.  En este archivo están
+ definidas las primitivas que tendrán que implementar, con su correspondiente 
+ documentación.
+
+ Hay que escribir el archivo pila.c, con la implementación de la estructura de 
+ la pila y de cada una de las primitivas incluidas en el encabezado.  
+ Además de las primitivas, pueden tener funciones auxiliares, de uso interno, que 
+ no hace falta que estén declaradas dentro de pila.h. En pila.h se encuentran 
+ únicamente las primitivas que el usuario de la pila tiene que conocer.
+
+ Estructura sugerida para la pila:
+ struct _pila {
+  void** datos;
+  size_t tamanio;
+  size_t cantidad;
+ };
+
+ Además de pila.c, tienen que entregar otro archivo prueba_pila.c, que 
+ contenga las pruebas unitarias para verificar que la pila funciona
+  correctamente, y que al ejecutarlo puede verificarse que todo funciona 
+  çcorrectamente y no se pierde memoria.
+
+ Tanto pila.c como prueba_pila.c deberán tener una línea que indique 
+ #include "pila.h" para que se incluya la información definida en el
+  archivo pila.h. La función main debe encontrarse únicamente en prueba_pila.c.
+
+ Para compilar y verificar estos archivos tendrán que hacer:
+
+Generar pila.o:
+    gcc -Wall --pedantic --std=c99 -c pila.c
+
+Generar el ejecutable prueba_pila:
+     gcc -Wall --pedantic --std=c99 pila.o prueba_pila.c -o prueba_pila
+
+Verificar que no pierden memoria:
+valgrind --leak-check=full ./prueba_pila
+
+Al igual que en los casos anteriores, deberán entregar el código en papel, con el nombre y padrón de los integrantes del grupo, y nombre del ayudante correspondiente, imprimiendo el archivo pila.c y el archivo prueba_pila.c.  Además, deben enviar por mail ambos archivos a la dirección tps.7541rw@gmail.com .  En el asunto deben indicar: Pila - Padron1 - Apellido1 - Padron2 - Apellido2.

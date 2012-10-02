@@ -61,6 +61,7 @@ bool pila_apilar(pila_t *pila, void* valor)
 	    pila->datos = realloc(pila->datos, 10* sizeof(void*));
 	    //~ puts("hice un realloc");
 	    pila->tamanio += 10;
+	    printf("tamanio: %zu\n", pila->tamanio);
 		}    
     //verifico que todo haya funcionado
     if (pila->datos == NULL) return false;
@@ -78,15 +79,14 @@ bool pila_apilar(pila_t *pila, void* valor)
 // Pre: la pila fue creada.
 // Post: se devolviÃ³ el valor del tope de la pila, cuando la pila no estÃ¡
 // vacÃ­a, NULL en caso contrario.
-void* pila_ver_tope(const pila_t *pila)
-{
-    //~ printf("cant: %zu \n", pila->cantidad);
+void* pila_ver_tope(const pila_t *pila){
+    printf("tam - cant: %zu ###### ", (pila->tamanio -pila->cantidad));
     void* tope;
-    tope = (pila->datos + (pila->cantidad-1));    
+    tope = (pila->datos + (pila->cantidad));    
     //~ printf("tope: %p \n", tope);  
     if (pila->cantidad == 0) return NULL;
     return tope;
-}
+	}
    
     
 // Saca el elemento tope de la pila. Si la pila tiene elementos, se quita el
@@ -98,26 +98,14 @@ void* pila_ver_tope(const pila_t *pila)
 void* pila_desapilar(pila_t *pila)
 {
     if (pila_ver_tope(pila) == NULL) return NULL;
-    //~ puts("pase el ver_tope\n");
     // Guardo un puntero al valor que voy a desapilar
     void* desapilado;
     desapilado = pila_ver_tope(pila);
-    //~ printf("a desapilar %p\n", desapilado);
-    //~ printf ("tamanio antes de fiajrme el realloc: %zu \n", pila->tamanio);
-	//~ printf ("cant:  despues de restar: %zu \n", pila->cantidad);
-
-    //~ if (pila->tamanio== 0) {
-        //~ free(pila->datos);
-        //~ pila->datos = NULL;
-		//~ } 
-    //~ else {
-		if (pila->tamanio - pila->cantidad == 10){
-			pila->datos = realloc(pila->datos, -10* pila->tamanio*sizeof(void*));
-			pila->tamanio -= 10;}
-    //~ puts("pase el realloc\n");
-        //~ if (pila->datos == NULL) 
-            //~ return false;
-		//~ }
+	if ((pila->tamanio - pila->cantidad) == 10){
+		pila->datos = realloc(pila->datos, -10* pila->tamanio*sizeof(void*));
+		pila->tamanio -= 10;
+		printf("tamanio SAQUE REALLOC: %zu // cantiad: %zu \n", pila->tamanio, pila->cantidad);
+		}
     pila->cantidad -=1;
     // Devuelvo la referencia al valor desapilado
     return desapilado;

@@ -56,29 +56,34 @@ print_test("10) Prueba pila_desapilar (cadena)", strcmp(pila_desapilar(pila),val
 // pila = [val0] 
 print_test("11) Prueba ver tope VAL1", *(int*)(pila_ver_tope(pila))==val1);
 // pila = []
-print_test("12) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
+print_test("12) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val1);
 // pila = []
 print_test("13) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
 print_test("14) Prueba ver tope NULL", pila_ver_tope(pila)==NULL);
 
+
+print_test("14) Prueba esta vacia", pila_esta_vacia(pila));
+
 //Prueba de volumen
-    //~ int i  = 0;
-    //~ puts("\n*** Prueba de VOLUMEN ***");
-    //~ for (i=0; i < 99; i++)
-    //~ {
-        //~ pila_apilar(pila, &i);
-//~ 
-    //~ }
-    //~ print_test("Prueba elemento 99",*(int*)pila_ver_tope(pila)==99);
-//~ 
-    //~ for (i=98; i >0 ; i--)
-    //~ {
-        //~ pila_desapilar(pila);
-    //~ }
-//~ 
+    int i;
+    puts("\n*** Prueba de VOLUMEN ***");
+    for (i=0; i <= 19; i++){
+		//~ printf("i : %d)))", i);
+        pila_apilar(pila, i);
+        //~ printf("tope: %d\n",*(int*)pila_ver_tope(pila));
+		}
+    print_test("Prueba elemento 19",*(int*)pila_ver_tope(pila)==19);
+
+    for (i=19; i >0 ; i--){
+        //~ printf("i : %d)))", i);
+        pila_desapilar(pila);
+		printf("tope: %d\n",*(int*)pila_ver_tope(pila));
+		
+		}
+
     //~ print_test("Prueba, elemento 0",*(int*)pila_desapilar(pila)==0);
-    //~ print_test("Prueba si esta vacio",pila_esta_vacia(pila));
-//~ 
+    print_test("Prueba si esta vacio",pila_esta_vacia(pila));
+
 
 //Destruyo las pilas
 pila_destruir(pila);

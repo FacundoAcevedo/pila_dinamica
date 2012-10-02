@@ -67,7 +67,7 @@ bool pila_apilar(pila_t *pila, void* valor)
 	//~ printf("cantidad %zu\n", pila->cantidad);
 	//~ printf("direccion de datos %p\n", pila->datos);
 	//~ printf("direccion de datos + pila->cantidad (antes de agregar valor) %p\n", pila->datos + pila->cantidad);
-	*(pila->datos + pila->cantidad) = valor;
+	*(pila->datos + pila->cantidad+1) = valor;
     pila->cantidad += 1;
     //~ printf("direccion de datos + pila->cantidad (despues de agregar valor) %p\n", pila->datos + pila->cantidad);
 	return true;
@@ -80,10 +80,11 @@ bool pila_apilar(pila_t *pila, void* valor)
 // vacÃ­a, NULL en caso contrario.
 void* pila_ver_tope(const pila_t *pila)
 {
-    if (pila->cantidad == 0) return NULL;
+    //~ printf("cant: %zu \n", pila->cantidad);
     void* tope;
-    tope = (pila->datos + (pila->cantidad));
-    printf("tope: %p \n", tope); 
+    tope = (pila->datos + (pila->cantidad-1));    
+    //~ printf("tope: %p \n", tope);  
+    if (pila->cantidad == 0) return NULL;
     return tope;
 }
    
@@ -102,7 +103,6 @@ void* pila_desapilar(pila_t *pila)
     void* desapilado;
     desapilado = pila_ver_tope(pila);
     //~ printf("a desapilar %p\n", desapilado);
-    pila->cantidad -=1;
     //~ printf ("tamanio antes de fiajrme el realloc: %zu \n", pila->tamanio);
 	//~ printf ("cant:  despues de restar: %zu \n", pila->cantidad);
 
@@ -118,7 +118,7 @@ void* pila_desapilar(pila_t *pila)
         //~ if (pila->datos == NULL) 
             //~ return false;
 		//~ }
-
+    pila->cantidad -=1;
     // Devuelvo la referencia al valor desapilado
     return desapilado;
 }

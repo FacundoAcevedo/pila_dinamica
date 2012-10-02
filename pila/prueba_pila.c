@@ -20,8 +20,10 @@ void prueba_pila() {
 // Declaro las variables a utilizar
 int val0;
 val0 = 0;
+
 int val1;
-val1 = 1;
+val1 = 3331;
+
 char* val2;
 val2 = "xxx";
 
@@ -55,8 +57,9 @@ print_test("10) Prueba pila_desapilar (cadena)", strcmp(pila_desapilar(pila),val
 print_test("11) Prueba ver tope VAL1", *(int*)(pila_ver_tope(pila))==val1);
 // pila = []
 print_test("12) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
-//~ // pila = []
-//~ print_test("12) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
+// pila = []
+print_test("13) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
+print_test("14) Prueba ver tope NULL", pila_ver_tope(pila)==NULL);
 
 //Prueba de volumen
     //~ int i  = 0;

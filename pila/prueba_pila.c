@@ -18,31 +18,45 @@ void print_test(char* name, bool result) {
 void prueba_pila() {
     
 // Declaro las variables a utilizar
-int cero = 0;
-int uno = 1;
-int *val0 ;
-val0 = &cero;
-int *val1;
-val1 = &uno; 
-char *val2 = "Pod";
-
+int val0;
+val0 = 0;
+int val1;
+val1 = 1;
+char* val2;
+val2 = "xxx";
 
 // Comienzo de pruebas
 puts("\n*** Pruebas basicas ***");
 
 // Creo una pila
 pila_t* pila;
-print_test("Prueba pila_crear", pila = pila_crear());
+print_test("1) Prueba pila_crear", (pila = pila_crear()));
 
 // La pila esta vacia 
-print_test("Prueba pila_esta_vacia (0 elemento)", pila_esta_vacia(pila));
-print_test("Prueba pila_apilar (entero)",pila_apilar(pila, val0));  
-print_test("Prueba pila_esta_vacia (1 elemento)", !pila_esta_vacia(pila));
+print_test("2) Prueba pila_esta_vacia (0 elemento)", pila_esta_vacia(pila));
 
-print_test("Prueba ver tope", (pila_ver_tope(pila))==val0);
-//~ print_test("Prueba pila_apilar (cadena)",pila_apilar(pila, cadena1));
-//~ print_test("Prueba pila_desapilar (cadena)", !strcmp(pila_desapilar(pila),cadena1));
-//~ print_test("Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==3);
+// pila = [val0]
+print_test("3) Prueba pila_apilar (entero)",pila_apilar(pila, val0));  
+print_test("4) Prueba pila_esta_vacia (1 elemento)", !pila_esta_vacia(pila));
+print_test("5) Prueba ver tope VAL0", *(int*)(pila_ver_tope(pila))==val0);
+
+// pila = [val0, val1]
+print_test("6) Prueba pila_apilar (entero)",pila_apilar(pila, val1));  
+print_test("7) Prueba ver tope VAL1", *(int*)(pila_ver_tope(pila))==val1);
+
+// pila = [val0, val1, val2]
+print_test("8) Prueba pila_apilar (cadena)",pila_apilar(pila, val2));
+print_test("9) Prueba ver tope VAL2", strcmp(pila_ver_tope(pila),val2));
+
+
+// pila = [val0, val1]
+print_test("10) Prueba pila_desapilar (cadena)", strcmp(pila_desapilar(pila),val2));
+// pila = [val0] 
+print_test("11) Prueba ver tope VAL1", *(int*)(pila_ver_tope(pila))==val1);
+// pila = []
+print_test("12) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
+//~ // pila = []
+//~ print_test("12) Prueba pila_desapilar (entero)", *(int *)pila_desapilar(pila)==val0);
 
 //Prueba de volumen
     //~ int i  = 0;

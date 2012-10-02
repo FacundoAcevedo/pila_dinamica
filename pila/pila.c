@@ -59,7 +59,7 @@ bool pila_apilar(pila_t *pila, void* valor)
     //le reasigno memoria a pila.dato si llegue paso un multiplo de 10 en cantidad 
     if ((pila->tamanio - pila->cantidad) == 0){
 	    pila->datos = realloc(pila->datos, 10* sizeof(void*));
-	    puts("hice un realloc");
+	    //~ puts("hice un realloc");
 	    pila->tamanio += 10;
 		}    
     //verifico que todo haya funcionado
@@ -83,6 +83,7 @@ void* pila_ver_tope(const pila_t *pila)
     if (pila->cantidad == 0) return NULL;
     void* tope;
     tope = (pila->datos + (pila->cantidad));
+    printf("tope: %p \n", tope); 
     return tope;
 }
    
@@ -96,23 +97,28 @@ void* pila_ver_tope(const pila_t *pila)
 void* pila_desapilar(pila_t *pila)
 {
     if (pila_ver_tope(pila) == NULL) return NULL;
+    //~ puts("pase el ver_tope\n");
     // Guardo un puntero al valor que voy a desapilar
-    void* desapilado = pila_ver_tope(pila);
+    void* desapilado;
+    desapilado = pila_ver_tope(pila);
+    //~ printf("a desapilar %p\n", desapilado);
     pila->cantidad -=1;
-    
+    //~ printf ("tamanio antes de fiajrme el realloc: %zu \n", pila->tamanio);
+	//~ printf ("cant:  despues de restar: %zu \n", pila->cantidad);
 
-    if (pila->tamanio== 0) {
-        free(pila->datos);
-        pila->datos = NULL;
-		} 
-    else {
-		if (pila->tamanio % 10 == 0)
-        pila->datos = realloc(pila->datos, 10* pila->tamanio*sizeof(void*));
-        if (pila->datos == NULL) 
-            return false;
-		}
-    //asigno el puntero
-    pila->cantidad -= 1;
+    //~ if (pila->tamanio== 0) {
+        //~ free(pila->datos);
+        //~ pila->datos = NULL;
+		//~ } 
+    //~ else {
+		if (pila->tamanio - pila->cantidad == 10){
+			pila->datos = realloc(pila->datos, -10* pila->tamanio*sizeof(void*));
+			pila->tamanio -= 10;}
+    //~ puts("pase el realloc\n");
+        //~ if (pila->datos == NULL) 
+            //~ return false;
+		//~ }
+
     // Devuelvo la referencia al valor desapilado
     return desapilado;
 }

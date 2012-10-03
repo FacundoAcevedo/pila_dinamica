@@ -80,7 +80,7 @@ bool pila_apilar(pila_t *pila, void* valor)
 // Post: se devolviÃ³ el valor del tope de la pila, cuando la pila no estÃ¡
 // vacÃ­a, NULL en caso contrario.
 void* pila_ver_tope(const pila_t *pila){
-    printf("tam - cant: %zu ###### ", (pila->tamanio -pila->cantidad));
+    //~ printf("tam - cant: %zu ###### ", (pila->tamanio -pila->cantidad));
     void* tope;
     tope = (pila->datos + (pila->cantidad));    
     //~ printf("tope: %p \n", tope);  
@@ -102,11 +102,15 @@ void* pila_desapilar(pila_t *pila)
     void* desapilado;
     desapilado = pila_ver_tope(pila);
 	if ((pila->tamanio - pila->cantidad) == 10){
-		pila->datos = realloc(pila->datos, -10* pila->tamanio*sizeof(void*));
 		pila->tamanio -= 10;
+		void** nuevo_datos;
+		nuevo_datos= realloc(pila->datos, pila->tamanio*sizeof(void*));
+		if (nuevo_datos == NULL) return NULL;
+		pila->datos = nuevo_datos;
 		printf("tamanio SAQUE REALLOC: %zu // cantiad: %zu \n", pila->tamanio, pila->cantidad);
 		}
     pila->cantidad -=1;
     // Devuelvo la referencia al valor desapilado
+    printf("cantidad = %zu", pila->cantidad);
     return desapilado;
 }

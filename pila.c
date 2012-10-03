@@ -68,8 +68,8 @@ bool pila_apilar(pila_t *pila, void* valor)
 	//~ printf("cantidad %zu\n", pila->cantidad);
 	//~ printf("direccion de datos %p\n", pila->datos);
 	//~ printf("direccion de datos + pila->cantidad (antes de agregar valor) %p\n", pila->datos + pila->cantidad);
-	*(pila->datos + pila->cantidad+1) = valor;
     pila->cantidad += 1;
+	*(pila->datos + pila->cantidad) = valor;
     //~ printf("direccion de datos + pila->cantidad (despues de agregar valor) %p\n", pila->datos + pila->cantidad);
 	return true;
 }
@@ -82,7 +82,8 @@ bool pila_apilar(pila_t *pila, void* valor)
 void* pila_ver_tope(const pila_t *pila){
     //~ printf("tam - cant: %zu ###### ", (pila->tamanio -pila->cantidad));
     void* tope;
-    tope = (pila->datos + (pila->cantidad));    
+    /*tope = (pila->datos + (pila->cantidad));    */
+    tope = *(pila->datos + (pila->cantidad));    
     //~ printf("tope: %p \n", tope);  
     if (pila->cantidad == 0) return NULL;
     return tope;

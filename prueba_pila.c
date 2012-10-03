@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include "cola.h"
 
 
 /* ******************************************************************
@@ -14,6 +15,9 @@ void print_test(char* name, bool result) {
 	printf("%s: %s\n", name, result? "OK" : "ERROR");
 }
 
+void (destruir_colas)(void* dato) {
+	cola_destruir((cola_t*)dato, NULL);
+}
 /* Prueba que la funcion pila_crear se ejecute correctamente. */
 void prueba_pila() {
     
@@ -69,7 +73,18 @@ print_test("14) Prueba ver tope NULL", pila_ver_tope(pila)==NULL);
 print_test("15) Prueba pila_desapilar (no de tiene que poder)", pila_desapilar(pila)==NULL);
 print_test("16) Prueba esta vacia", pila_esta_vacia(pila));
 
-pila_destruir(pila);
+pila_destruir(pila, NULL);
+puts("########################################################");
+puts("\n\n\n Apilo una cola");
+
+
+
+cola_t* cola = cola_crear();
+pila_t* pila1 = pila_crear();
+pila_apilar(pila1, cola);
+pila_destruir(pila1, destruir_colas);
+
+
 }
 
 
